@@ -1,0 +1,55 @@
+
+PROCEDURE insersion_sort(VAR arr:ARRAY_OF INTEGER)
+VAR
+    i,j,k ,last , case_memoire :=INTEGER ; 
+
+BEGIN
+    
+    i := arr.length ;
+    last := arr[i-1] ;
+
+    FOR j FROM 0 TO i-2 STEP 1 DO
+        IF (arr[j]>last) THEN
+
+            // on met le dernier element du tableau dans une case memoire
+            case_memoire:=last;
+
+            //decalage du les elements superieur a 'last' vers droit
+            FOR k FROM i-1 TO j+1 STEP -1  DO
+                arr[k] := arr[k-1] ;
+            END_FOR
+
+            //on met la valeur du case memoire dans arr[j] et on sort du la boucle 
+            arr[j] := case_memoire ;
+
+            Break ;
+        END_IF
+    END_FOR 
+
+END
+
+
+
+
+ALGORITHM SortingAlgorithm
+VAR
+    i : INTEGER :=0 ; // index du array
+    arr : ARRAY_OF INTEGER; //array for presenting the vector
+    number : INTEGER ; // for arr[i]
+
+BEGIN
+    
+    //read size of array
+    REPEAT
+        Read(number);
+        arr[i] := number ;
+        i := i+1 ;
+
+        //au moins 2 elements pour faire le tri
+        IF (i>=1) THEN 
+            insersion_sort(arr) ;
+        END_IF
+
+    UNTIL (i>20) // maximum 19 : size du array
+
+END
