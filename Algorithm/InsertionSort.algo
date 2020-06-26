@@ -1,0 +1,94 @@
+//work only with the first i-1 element from of the array
+PROCEDURE Tri_Sort(i :INTEGER, VAR arr:ARRAY_OF INTEGER)
+VAR
+    j,k : INTEGER := 0;
+    x : INTEGER ; 
+    case_memoire : INTEGER ; 
+BEGIN
+    
+    FOR j FROM i-1 TO 0 STEP -1 DO
+        FOR k FROM 0 TO j STEP 1 DO
+        // on compare i-1 avec le reste du tableau (a gauche)
+        IF (arr[j]<arr[k]) THEN
+                case_memoire := arr[j];
+                arr[j] := arr[k];
+                arr[k] := case_memoire ; 
+            END_IF
+    END_FOR
+END
+
+//Pick element arr[i] and insert it into sorted sequence in the array from 0 to i-1.
+PROCEDURE insersion_sort(VAR arr:ARRAY_OF INTEGER)
+VAR
+    i,j,k:=INTEGER ; 
+BEGIN
+    i := arr.length ;
+    case_memoire : INTEGER ;
+    
+    FOR j FROM 0 TO i-2 STEP 1 DO
+        IF (arr[j]>arr[i-1]) THEN
+
+            // on met le dernier element du tableau dans une case memoire
+            case_memoire:=arr[i-1];
+
+            //decalage vers droit
+            FOR k FROM i-1 TO j+1 STEP -1  DO
+                arr[k] := arr[k-1] ;
+            END_FOR
+
+            //on met la valeur du case memoire dans arr[j] et on sort du la boucle 
+            arr[j] := case_memoire ;
+
+            Break ;
+        END_IF
+    END_FOR 
+
+END
+
+
+
+
+ALGORITHM SortingAlgorithm
+VAR
+    i : INTEGER ; //size of array
+    j : INTEGER ;
+    arr : ARRAY_OF INTEGER; //array for presenting the vector
+    number : INTEGER ; // for arr[i]
+
+BEGIN
+    
+    //read size of array
+    REPEAT
+        Read(i);
+    UNTIL (i<=2 OR i>20) // minimum 2 elements et maximum 20
+
+
+    // remplir array 
+
+    FOR j FROM 0 TO i-1 STEP 1 DO
+        
+    
+        Read(arr[j]) ;
+    
+
+    END_FOR
+
+    //appel procedure de Tri 
+
+    Tri_Sort (i,T)
+    
+
+    //Pick element arr[i] and insert it into sorted sequence in the array from 0 to i-1.
+    REPEAT 
+
+        Read (number) ; 
+
+        //Pick element arr[i]
+        arr[i]:=number ;
+
+        //appel procedure for insert it into sorted sequence
+        insersion_sort(arr);
+
+    UNTIL(number<0)
+
+END
